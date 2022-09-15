@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"index.js"
+    "start": "index.js"
   },
   "author": "Jyoti , Prital , Meenakshi, Bhuvan",
   "license": "ISC",
@@ -17,6 +17,3 @@
     "nodemon": "^2.0.19"
   }
 }
-
-
-

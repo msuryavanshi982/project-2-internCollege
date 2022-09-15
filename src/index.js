@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let url = " ";
+let url = "mongodb+srv://meenakshiSuryavanshi:ZVnFmXr4hAJCCKdL@cluster0.b80r4d1.mongodb.net/project-2";
 let port = process.env.PORT || 3000;
 
 mongoose.connect(url, {useNewUrlParser: true })
