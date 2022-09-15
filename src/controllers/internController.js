@@ -110,8 +110,6 @@ const createIntern = async function (req, res) {
         collegeId: collegeId
     }
 
-
-
     const newIntern = await internModel.create(obj);
     return res
         .status(201)
@@ -159,26 +157,23 @@ const getIntern = async function (req, res) {
         }
 
         let list = await internModel.find({ collegeId: collegeID, isDeleted: false }, { name: 1, email: 1, mobile: 1 })
+      if(list.length==0){
 
-        delete (requiredCollege._id)
-        requiredCollege.interns = list
+        var x = "No interns in this college exist"
+      }
+      else{
+        var x = list
+      }
+
+        
+        
         let obj = {
             name: requiredCollege.name,
             fullName: requiredCollege.fullName,
             logoLink: requiredCollege.logoLink,
-            interns: list
+            interns: x
         };
-        if (list.length==0){
-
-            let obj1 = {
-                name: requiredCollege.name,
-                fullName: requiredCollege.fullName,
-                logoLink: requiredCollege.logoLink,
-                interns:"No interns of this college"
-            }
-            return res.status(201).send({ status: true, message: "no interns in this college  exist", data: obj1 });
-
-        }
+    
 
 
 
