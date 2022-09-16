@@ -142,7 +142,39 @@ const getIntern = async function (req, res) {
         }
 
         //let {name, fullName, logoLink} = listOfInterns
-        let requiredCollege = await collegeModel.findOne({ name: collegeName, isDeleted: false }, { name: 1, fullName: 1, logoLink: 1 })
+      //  let requiredCollege = await collegeModel.findOne({ name: collegeName, isDeleted: false }, { name: 1, fullName: 1, logoLink: 1 })
+
+
+        const requiredCollege = await internModel.find({
+            $or: [
+                { name: name },
+                { fullName: fullName }
+            ]
+        })
+         
+        if (requiredCollege.length >= 1) 
+        {
+          if(requiredCollege.length==1){
+             if(requiredCollege[0].name==name){
+                 return res
+             .status(400)
+             .send({ status: false, message: "name already exist" })
+              }
+              if(requiredCollege[0].fullName==fullName){
+                 return res
+             .status(400)
+             .send({ status: false, message: "fullname already exist" })
+              }
+
+          }
+          else{
+              return res
+             .status(400)
+             .send({ status: false, message: "Both already exist" })
+             }
+          }
+ 
+
 
         let collegeID = requiredCollege._id
 
