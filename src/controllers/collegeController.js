@@ -34,17 +34,17 @@ const createCollege = async function (req, res) {
                   send({ status: false, message: "Invalid data entry inside request body" })
         }
        
-        let y = name.trim()
-        if (!isValid(y) || !regixValidator(y)) {
+       
+        if (!isValid(name) || !regixValidator(name)) {
             return res
                 .status(400)
                 .send({ status: false, message: " name is required or its should contain character" })
         }
 
-        let x = fullName.trim()
+       
         const isNameUnique = await collegeModel.find( {$or: [
             { name: name },
-            { fullName: x }
+            { fullName: fullName }
         ]})
        
         if (isNameUnique.length >= 1) 
@@ -55,7 +55,7 @@ const createCollege = async function (req, res) {
              .status(400)
              .send({ status: false, message: "Name already exist" })
               }
-              if(isNameUnique[0].fullName==x){
+              if(isNameUnique[0].fullName==fullName){
                  return res
              .status(400)
              .send({ status: false, message: "Fullname already exist" })
@@ -71,7 +71,7 @@ const createCollege = async function (req, res) {
  
               
               
-        if (!isValid(x) ||  !regixValidator(x) ) {
+        if (!isValid(fullName) ||  !regixValidator(fullName) ) {
             return res
                 .status(400)
                 .send({ status: false, message: "fullname is invalid" })
@@ -86,9 +86,7 @@ const createCollege = async function (req, res) {
 
     
         const newCollege = await collegeModel.create(data);
-       let College = {name:newCollege.name,
-        fullName:newCollege.fullName,
-        logoLink:newCollege.logoLink,
+       let College = {...data,
         isDeleted:newCollege.isDeleted}
     
                                           
