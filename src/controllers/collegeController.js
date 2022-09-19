@@ -56,14 +56,8 @@ const getColleges = async (req, res) => {
         result._doc.interns = x
         return res.status(200).send({ status: true, data: result })
 
-
-        const internDeatils = {     // get all interns[] related to this college _id
-            name: cName,
-            fullName: result[0].fullName,
-            logoLink: result[0].logoLink,
-            interns: x
-        }  
-        return res.status(200).send({ status: true, data: internDeatils })
+       
+      
     }
     catch (err) {
         console.log(err)
