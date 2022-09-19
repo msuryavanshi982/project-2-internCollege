@@ -58,7 +58,7 @@ const getColleges = async function (req, res) {
             logoLink: result[0].logoLink,
             interns: x
         }
-        return res.status(200).send({ status: true, Data: internDeatils })
+        return res.status(200).send({ status: true, data: internDeatils })
     }
     catch (error) {
         console.log(error)
