@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const route = require("./routes/route");
 const { default: mongoose } = require("mongoose");
+const multer = require('multer')
 const app = express();
+
+app.use(multer().any())
 
 app.use(bodyParser.json());
 
 let url ="mongodb+srv://meenakshiSuryavanshi:ZVnFmXr4hAJCCKdL@cluster0.b80r4d1.mongodb.net/project-2";
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 
 mongoose.connect(url, {useNewUrlParser: true })
   .then(() => console.log("MongoDb is connected"))
